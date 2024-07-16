@@ -7,50 +7,34 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n, m, k;
-        cin >> n >> m >> k;
+        int n, k;
+        cin >> n >> k;
 
-        vector<int> arr(n);
-
-        int temp;
-        temp = n;
-        for (int i = 0; i <= n - k; i++)
+        vector<int> arr(k);
+        for(int i=0 ; i<k ; i++)
         {
-            arr[i] = temp;
-            temp--;
+            cin>>arr[i];
         }
 
-        temp = m;
-        for (int i = n - 1; i >= n - m; i--)
-        {
-            arr[i] = temp;
-            temp--;
-        }
-        if (arr[n - k + 1] && arr[n - m - 1])
-        {
+        sort(arr.begin(),arr.end(),greater<int>());
+        int count=0;
 
-            for (int i = 0; i < arr.size(); i++)
+        while(arr.size()>1)
+        {
+            if(arr[arr.size()-1] == 1)
             {
-                cout << arr[i] << " ";
+                arr.pop_back();
+                count++;
+            }
+            else
+            {
+                count += 2*(arr[arr.size()-1])-1;
+                arr.pop_back();
+                
             }
         }
 
-        else
-        {
-            temp=m+1;
-            for (int i = n - k + 1; i < n - m; i++)
-            {
-                arr[i] = temp;
-                temp++;
-            }
-
-            for (int i = 0; i < arr.size(); i++)
-            {
-                cout << arr[i] << " ";
-            }
-        }
-
-        
+        cout<<count<<endl;
     }
     return 0;
 }
